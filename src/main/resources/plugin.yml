@@ -1,0 +1,4 @@
+name: BungeeCord
+main: com.mcgautruc.bungeecord.BungeeCord
+version: ${project.version}
+author: xHexed
