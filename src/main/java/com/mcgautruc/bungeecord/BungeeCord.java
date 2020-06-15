@@ -11,13 +11,10 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BungeeCord extends Plugin implements Listener {
     private Configuration config;
     private Favicon favicon;
-    private final List<String> commands = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -46,8 +43,6 @@ public class BungeeCord extends Plugin implements Listener {
             catch (final IOException e) {
                 getLogger().warning("Favicon file is invalid or missing.");
             }
-        commands.clear();
-        config.getStringList("commands").forEach((c) -> commands.add(c.toLowerCase()));
     }
 
     public void saveConfig() {
@@ -62,8 +57,10 @@ public class BungeeCord extends Plugin implements Listener {
     private void saveDefaultConfig() {
         if (!getDataFolder().exists())
             getDataFolder().mkdir();
+        final File file = new File(getDataFolder(), "config.yml");
+        if (file.exists()) return;
         try (final InputStream config = getResourceAsStream("config.yml");
-            final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(getDataFolder(), "config.yml")))) {
+            final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
             stream.write(config.readAllBytes());
             stream.flush();
         } catch (final IOException e) {
@@ -73,9 +70,5 @@ public class BungeeCord extends Plugin implements Listener {
 
     Favicon getFavicon() {
         return favicon;
-    }
-
-    List<String> getCommands() {
-        return commands;
     }
 }
