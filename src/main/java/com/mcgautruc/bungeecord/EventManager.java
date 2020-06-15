@@ -1,5 +1,6 @@
 package com.mcgautruc.bungeecord;
 
+import com.mcgautruc.bungeecord.command.CommandHandler;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -60,7 +61,7 @@ public class EventManager implements Listener {
             return;
         if (plugin.getCommands().contains(command.toLowerCase())) {
             event.setCancelled(true);
-            player.sendMessage(new TextComponent(TextComponent.fromLegacyText("Lệnh không hợp lệ. /help để xem trợ giúp")));
+            player.sendMessage(new TextComponent(CommandHandler.UNKNOWN_COMMAND));
         }
     }
 }
