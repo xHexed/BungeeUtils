@@ -1,5 +1,6 @@
-package com.mcgautruc.bungeecord;
+package com.mcgautruc.bungeecord.command;
 
+import com.mcgautruc.bungeecord.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -7,14 +8,14 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
-class CommandHandler extends Command {
+public class CommandHandler extends Command {
     private static final BaseComponent[] UNKNOWN_COMMAND = TextComponent.fromLegacyText("Lệnh không hợp lệ. /help để xem trợ giúp");
     private static final BaseComponent[] USAGE = TextComponent.fromLegacyText("/motd [set|reload]");
     private static final BaseComponent[] MOTD_REMOVED = new ComponentBuilder().color(ChatColor.GREEN).append("Current motd removed.").create();
     private static final BaseComponent[] CONFIG_RELOADED = new ComponentBuilder().color(ChatColor.GREEN).append("Configuration reloaded").create();
     private final BungeeCord plugin;
 
-    CommandHandler(final BungeeCord plugin) {
+    public CommandHandler(final BungeeCord plugin) {
         super("motd");
         this.plugin = plugin;
     }

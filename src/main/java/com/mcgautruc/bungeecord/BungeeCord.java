@@ -1,37 +1,38 @@
 package com.mcgautruc.bungeecord;
 
+import com.mcgautruc.bungeecord.command.CommandHandler;
+import com.mcgautruc.bungeecord.command.LobbyCommand;
 import net.md_5.bungee.api.Favicon;
-import net.md_5.bungee.api.ServerPing;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import net.md_5.bungee.event.EventHandler;
 
 import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BungeeCord extends Plugin implements Listener {
     private Configuration config;
     private Favicon favicon;
+    private final List<String> commands = new ArrayList<>();
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         reloadConfig();
-        getProxy().getPluginManager().registerListener(this, this);
+        getProxy().getPluginManager().registerListener(this, new EventManager(this));
         getProxy().getPluginManager().registerCommand(this, new CommandHandler(this));
+        getProxy().getPluginManager().registerCommand(this, new LobbyCommand());
     }
 
-    Configuration getConfig() {
+    public Configuration getConfig() {
         return config;
     }
 
-    void reloadConfig() {
+    public void reloadConfig() {
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
         } catch (final IOException e) {
@@ -45,9 +46,11 @@ public class BungeeCord extends Plugin implements Listener {
             catch (final IOException e) {
                 getLogger().warning("Favicon file is invalid or missing.");
             }
+        commands.clear();
+        config.getStringList("commands").forEach((c) -> commands.add(c.toLowerCase()));
     }
 
-    void saveConfig() {
+    public void saveConfig() {
         try {
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(getDataFolder(), "config.yml"));
         }
@@ -59,24 +62,20 @@ public class BungeeCord extends Plugin implements Listener {
     private void saveDefaultConfig() {
         if (!getDataFolder().exists())
             getDataFolder().mkdir();
-        final File configFile = new File(getDataFolder(), "config.yml");
-        if (!configFile.exists())
-            try {
-                configFile.createNewFile();
-            }
-            catch (final IOException e) {
-                throw new RuntimeException("Unable to create configuration file", e);
-            }
+        try (final InputStream config = getResourceAsStream("config.yml");
+            final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(getDataFolder(), "config.yml")))) {
+            stream.write(config.readAllBytes());
+            stream.flush();
+        } catch (final IOException e) {
+            throw new RuntimeException("Unable to create configuration file", e);
+        }
     }
 
-    @EventHandler(priority = 64)
-    public void onServerListPing(final ProxyPingEvent event) {
-        if (config.getString("motd") != null) {
-            final ServerPing ping = event.getResponse();
-            ping.setDescriptionComponent(new TextComponent(TextComponent.fromLegacyText(config.getString("motd"))));
-            if (favicon != null)
-                ping.setFavicon(favicon);
-            event.setResponse(ping);
-        }
+    Favicon getFavicon() {
+        return favicon;
+    }
+
+    List<String> getCommands() {
+        return commands;
     }
 }
