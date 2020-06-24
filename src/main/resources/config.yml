@@ -1,1 +1,6 @@
+#Dùng \n để xuống dòng
+#Thay & bằng § dùng phím Alt + 21
 motd: "&eDefault Motd\n&7New line"
+disconnect:
+  header: "Bạn đã bị mất kết nối. Lý do:"
+  footer: "Đang chuyển bạn về lobby..."
