@@ -59,9 +59,8 @@ public class BungeeCord extends Plugin implements Listener {
             getDataFolder().mkdir();
         final File file = new File(getDataFolder(), "config.yml");
         if (file.exists()) return;
-        try (final InputStream config = getResourceAsStream("config.yml");
-            final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
-            stream.write(config.readAllBytes());
+        try (final BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file))) {
+            stream.write(getResourceAsStream("config.yml").readAllBytes());
             stream.flush();
         } catch (final IOException e) {
             throw new RuntimeException("Unable to create configuration file", e);
