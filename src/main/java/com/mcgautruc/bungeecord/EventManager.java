@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.event.ServerKickEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -29,12 +30,13 @@ public class EventManager implements Listener {
         }
     }
 
-    @EventHandler(priority = 64)
+    @EventHandler
     public void onPlayerDisconnect(final ServerKickEvent event) {
-        if (event.getKickedFrom() != lobby) {
+        final ProxiedPlayer player = event.getPlayer();
+        final Server server = player.getServer();
+        if (event.getKickedFrom() != lobby && server != null && !server.getInfo().equals(lobby)) {
             event.setCancelled(true);
             event.setCancelServer(lobby);
-            final ProxiedPlayer player = event.getPlayer();
             player.sendMessage(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("disconnect.header"))));
             player.sendMessage(event.getKickReasonComponent());
             player.sendMessage(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("disconnect.footer"))));
