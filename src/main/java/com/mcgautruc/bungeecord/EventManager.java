@@ -24,8 +24,6 @@ public class EventManager implements Listener {
         if (plugin.getConfig().getString("motd") != null) {
             final ServerPing ping = event.getResponse();
             ping.setDescriptionComponent(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("motd"))));
-            if (plugin.getFavicon() != null)
-                ping.setFavicon(plugin.getFavicon());
             event.setResponse(ping);
         }
     }
