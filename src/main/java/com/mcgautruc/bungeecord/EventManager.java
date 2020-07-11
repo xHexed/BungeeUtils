@@ -1,7 +1,9 @@
 package com.mcgautruc.bungeecord;
 
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -37,6 +39,10 @@ public class EventManager implements Listener {
             event.setCancelServer(lobby);
             player.sendMessage(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("disconnect.header"))));
             player.sendMessage(event.getKickReasonComponent());
+            for (final BaseComponent component : event.getKickReasonComponent()) {
+                player.sendMessage(new TextComponent(TextComponent.fromLegacyText(
+                        ChatColor.translateAlternateColorCodes('&', component.toLegacyText()))));
+            }
             player.sendMessage(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("disconnect.footer"))));
         }
     }
