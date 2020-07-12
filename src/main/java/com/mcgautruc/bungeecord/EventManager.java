@@ -38,7 +38,6 @@ public class EventManager implements Listener {
             event.setCancelled(true);
             event.setCancelServer(lobby);
             player.sendMessage(new TextComponent(TextComponent.fromLegacyText(plugin.getConfig().getString("disconnect.header"))));
-            player.sendMessage(event.getKickReasonComponent());
             for (final BaseComponent component : event.getKickReasonComponent()) {
                 player.sendMessage(new TextComponent(TextComponent.fromLegacyText(
                         ChatColor.translateAlternateColorCodes('&', component.toLegacyText()))));
