@@ -1,6 +1,10 @@
-#Dùng \n để xuống dòng
-#Thay & bằng § dùng phím Alt + 21 (Ctrl + H or Ctrl + R)
-motd: "&eDefault Motd\n&7New line"
-disconnect:
-  header: "Bạn đã bị mất kết nối. Lý do:\n"
+lobby-server: "lobby"
+
+permission:
+  command: "admin"
+
+messages:
+  disconnect:
+    header: "Bạn đã bị mất kết nối. Lý do:\n"
     footer: "\nĐang chuyển bạn về lobby..."
+  reload: "Reloaded"
