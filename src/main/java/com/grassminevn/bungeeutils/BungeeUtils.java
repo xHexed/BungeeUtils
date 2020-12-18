@@ -1,7 +1,7 @@
-package com.mcgautruc.bungeecord;
+package com.grassminevn.bungeeutils;
 
-import com.mcgautruc.bungeecord.command.CommandHandler;
-import com.mcgautruc.bungeecord.command.LobbyCommand;
+import com.grassminevn.bungeeutils.command.CommandHandler;
+import com.grassminevn.bungeeutils.command.LobbyCommand;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-public class BungeeCord extends Plugin implements Listener {
+public class BungeeUtils extends Plugin implements Listener {
     private Configuration config;
 
     @Override
@@ -47,8 +47,7 @@ public class BungeeCord extends Plugin implements Listener {
     }
 
     private void saveDefaultConfig() {
-        if (!getDataFolder().exists())
-            getDataFolder().mkdir();
+        getDataFolder().mkdir();
         final File file = new File(getDataFolder(), "config.yml");
         if (file.exists()) return;
         try {

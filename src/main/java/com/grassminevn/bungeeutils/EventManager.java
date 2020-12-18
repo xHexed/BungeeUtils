@@ -1,4 +1,4 @@
-package com.mcgautruc.bungeecord;
+package com.grassminevn.bungeeutils;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
@@ -15,9 +15,9 @@ import net.md_5.bungee.event.EventHandler;
 
 public class EventManager implements Listener {
     private static final ServerInfo lobby = ProxyServer.getInstance().getServerInfo("lobby");
-    private final BungeeCord plugin;
+    private final BungeeUtils plugin;
 
-    EventManager(final BungeeCord plugin) {
+    EventManager(final BungeeUtils plugin) {
         this.plugin = plugin;
     }
 

@@ -1,4 +1,4 @@
-package com.mcgautruc.bungeecord.command;
+package com.grassminevn.bungeeutils.command;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;

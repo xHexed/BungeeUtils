@@ -1,0 +1,4 @@
+name: BungeeUtils
+main: com.grassminevn.bungeeutils.BungeeUtils
+version: ${project.version}
+author: xHexed

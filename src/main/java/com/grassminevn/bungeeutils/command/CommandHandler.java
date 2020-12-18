@@ -1,6 +1,6 @@
-package com.mcgautruc.bungeecord.command;
+package com.grassminevn.bungeeutils.command;
 
-import com.mcgautruc.bungeecord.BungeeCord;
+import com.grassminevn.bungeeutils.BungeeUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -13,9 +13,9 @@ public class CommandHandler extends Command {
     private static final BaseComponent[] USAGE = TextComponent.fromLegacyText("/motd [set|reload]");
     private static final BaseComponent[] MOTD_REMOVED = new ComponentBuilder().color(ChatColor.GREEN).append("Current motd removed.").create();
     private static final BaseComponent[] CONFIG_RELOADED = new ComponentBuilder().color(ChatColor.GREEN).append("Configuration reloaded").create();
-    private final BungeeCord plugin;
+    private final BungeeUtils plugin;
 
-    public CommandHandler(final BungeeCord plugin) {
+    public CommandHandler(final BungeeUtils plugin) {
         super("motd");
         this.plugin = plugin;
     }
@@ -43,7 +43,7 @@ public class CommandHandler extends Command {
                 sender.sendMessage(UNKNOWN_COMMAND);
                 return;
             }
-            else if ("reload".equals(args[0].toLowerCase())) {
+            else if ("reload".equalsIgnoreCase(args[0])) {
                 if (sender.hasPermission("bungeemotd.reload")) {
                     plugin.reloadConfig();
                     sender.sendMessage(CONFIG_RELOADED);

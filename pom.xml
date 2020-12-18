@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mcgautruc</groupId>
-    <artifactId>bungeecord</artifactId>
-    <version>1.0</version>
-    <name>BungeeCord</name>
+    <groupId>com.grassminevn</groupId>
+    <artifactId>bungeeutils</artifactId>
+    <version>1.1</version>
+    <name>BungeeUtils</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
-        <finalName>BungeeCord</finalName>
+        <finalName>${project.name}</finalName>
         <resources>
             <resource>
                 <filtering>true</filtering>
@@ -37,7 +37,7 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.15-SNAPSHOT</version>
+            <version>1.16-R0.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
