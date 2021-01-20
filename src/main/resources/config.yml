@@ -1,6 +1,6 @@
 lobby-server: "lobby"
 
-permission:
+permissions:
   command: "admin"
 
 messages:

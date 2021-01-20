@@ -12,7 +12,7 @@ public class MainCommand extends Command {
     private final BaseComponent[] reloadMessage;
 
     public MainCommand(final BungeeUtils plugin) {
-        super("bungeeutils", plugin.getConfigManager().getConfig().getString("permission.command"), "bu");
+        super("bungeeutils", plugin.getConfigManager().getConfig().getString("permissions.command"), "bu");
         this.plugin = plugin;
 
         reloadMessage = TextComponent.fromLegacyText(
