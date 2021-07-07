@@ -8,3 +8,7 @@ messages:
     header: "Bạn đã bị mất kết nối. Lý do:\n"
     footer: "\nĐang chuyển bạn về lobby..."
   reload: "Reloaded"
+  ignore-words:
+    - Hack
+
+server-type: VANILLA
