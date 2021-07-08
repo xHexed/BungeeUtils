@@ -27,7 +27,6 @@ public class ConfigManager {
         ConfigurationProvider provider = ConfigurationProvider.getProvider(YamlConfiguration.class);
         try {
             config = provider.load(configFile);
-            provider.save(config, configFile);
         } catch (IOException e) {
             throw new RuntimeException("Unable to load configuration", e);
         }
