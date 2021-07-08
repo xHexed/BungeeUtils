@@ -12,7 +12,7 @@ public class LobbyCommand extends Command {
 
     public LobbyCommand(BungeeUtils plugin) {
         super(plugin.getConfigManager().getConfig().getString("lobby-command.command"), null,
-                (String[]) plugin.getConfigManager().getConfig().getStringList("lobby-command.aliases").toArray());
+                plugin.getConfigManager().getConfig().getStringList("lobby-command.aliases").toArray(new String[0]));
         lobbyServer = ProxyServer.getInstance().getServerInfo("lobby");
     }
 
