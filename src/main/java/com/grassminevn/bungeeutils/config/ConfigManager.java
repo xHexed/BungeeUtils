@@ -35,6 +35,7 @@ public class ConfigManager {
 
     public void saveDefaultConfig() {
         plugin.getDataFolder().mkdir();
+        if (configFile.exists()) return;
         try {
             Files.copy(plugin.getResourceAsStream("config.yml"), configFile.toPath());
         } catch (IOException e) {
