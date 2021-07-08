@@ -19,8 +19,8 @@ import java.util.Set;
 
 public class ConfigManager {
     private Configuration config;
-    private final Plugin plugin;
-    private final File configFile;
+    private Plugin plugin;
+    private File configFile;
 
     public ServerInfo lobbyServer;
     public BaseComponent[] disconnectHeaderMessage;
@@ -28,7 +28,7 @@ public class ConfigManager {
     public Set<String> ignoreWords;
     public String serverType;
 
-    public ConfigManager(final Plugin plugin) {
+    public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
         configFile = new File(plugin.getDataFolder(), "config.yml");
     }
@@ -40,7 +40,7 @@ public class ConfigManager {
     public void reloadConfig() {
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Unable to load configuration", e);
         }
         lobbyServer  = ProxyServer.getInstance().getServerInfo(config.getString("lobby-server", "lobby"));
@@ -55,7 +55,7 @@ public class ConfigManager {
         if (configFile.exists()) return;
         try {
             Files.copy(plugin.getResourceAsStream("config.yml"), configFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (final IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Unable to create configuration file", e);
         }
     }

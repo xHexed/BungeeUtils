@@ -14,14 +14,14 @@ import net.md_5.bungee.event.EventHandler;
 public class EventManager implements Listener {
     private BungeeUtils plugin;
 
-    EventManager(final BungeeUtils plugin) {
+    public EventManager(BungeeUtils plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler
-    public void onPlayerDisconnect(final ServerKickEvent event) {
-        final ProxiedPlayer player = event.getPlayer();
-        final Server server = player.getServer();
+    public void onPlayerDisconnect(ServerKickEvent event) {
+        ProxiedPlayer player = event.getPlayer();
+        Server server = player.getServer();
         for (BaseComponent component : event.getKickReasonComponent()) {
             if (plugin.getConfigManager().ignoreWords.contains(component.toLegacyText())) {
                 return;
@@ -31,7 +31,7 @@ public class EventManager implements Listener {
             event.setCancelled(true);
             event.setCancelServer(plugin.getConfigManager().lobbyServer);
             player.sendMessage(plugin.getConfigManager().disconnectHeaderMessage);
-            for (final BaseComponent component : event.getKickReasonComponent()) {
+            for (BaseComponent component : event.getKickReasonComponent()) {
                 player.sendMessage(new TextComponent(TextComponent.fromLegacyText(
                         ChatColor.translateAlternateColorCodes('&', component.toLegacyText()))));
             }

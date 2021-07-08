@@ -7,7 +7,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
 public class LobbyCommand extends Command {
-    private final ServerInfo lobbyServer;
+    private ServerInfo lobbyServer;
 
     public LobbyCommand() {
         super("lobby", null, "hub");
@@ -15,9 +15,9 @@ public class LobbyCommand extends Command {
     }
 
     @Override
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) return;
-        final ProxiedPlayer player = (ProxiedPlayer) sender;
+        ProxiedPlayer player = (ProxiedPlayer) sender;
         player.connect(lobbyServer);
     }
 }

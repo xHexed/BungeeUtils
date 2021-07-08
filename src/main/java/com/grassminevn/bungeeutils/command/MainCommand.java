@@ -8,10 +8,10 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
 public class MainCommand extends Command {
-    private final BungeeUtils plugin;
-    private final BaseComponent[] reloadMessage;
+    private BungeeUtils plugin;
+    private BaseComponent[] reloadMessage;
 
-    public MainCommand(final BungeeUtils plugin) {
+    public MainCommand(BungeeUtils plugin) {
         super("bungeeutils", plugin.getConfigManager().getConfig().getString("permissions.command"), "bu");
         this.plugin = plugin;
 
