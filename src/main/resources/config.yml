@@ -1,14 +1,21 @@
-lobby-server: "lobby"
-
+disconnect:
+  enabled: true
+  disconnect-server: "lobby"
+  ignored-words:
+    - Hack
+modify-server-info:
+  enabled: true
+  server-type: VANILLA
+  server-brand: Vanilla
+lobby-command:
+  enabled: true
+  command: lobby
+  aliases:
+    - hub
 permissions:
-  command: "admin"
-
+  main-command: "admin"
 messages:
   disconnect:
     header: "Bạn đã bị mất kết nối. Lý do:\n"
     footer: "\nĐang chuyển bạn về lobby..."
   reload: "Reloaded"
-  ignore-words:
-    - Hack
-
-server-type: VANILLA

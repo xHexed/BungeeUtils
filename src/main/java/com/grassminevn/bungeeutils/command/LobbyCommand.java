@@ -1,5 +1,6 @@
 package com.grassminevn.bungeeutils.command;
 
+import com.grassminevn.bungeeutils.BungeeUtils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
@@ -9,8 +10,9 @@ import net.md_5.bungee.api.plugin.Command;
 public class LobbyCommand extends Command {
     private ServerInfo lobbyServer;
 
-    public LobbyCommand() {
-        super("lobby", null, "hub");
+    public LobbyCommand(BungeeUtils plugin) {
+        super(plugin.getConfigManager().getConfig().getString("lobby-command.command"), null,
+                (String[]) plugin.getConfigManager().getConfig().getStringList("lobby-command.aliases").toArray());
         lobbyServer = ProxyServer.getInstance().getServerInfo("lobby");
     }
 
